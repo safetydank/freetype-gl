@@ -485,13 +485,12 @@ texture_font_load_glyphs( texture_font_t * self,
 
         if( depth == 3 )
         {
-            // XXX add LCD filter to freetype lib build
-//            FT_Library_SetLcdFilter( library, FT_LCD_FILTER_LIGHT );
-//            flags |= FT_LOAD_TARGET_LCD;
-//            if( self->filtering )
-//            {
-//                FT_Library_SetLcdFilterWeights( library, self->lcd_weights );
-//            }
+            FT_Library_SetLcdFilter( library, FT_LCD_FILTER_LIGHT );
+            flags |= FT_LOAD_TARGET_LCD;
+            if( self->filtering )
+            {
+                FT_Library_SetLcdFilterWeights( library, self->lcd_weights );
+            }
         }
         error = FT_Load_Glyph( face, glyph_index, flags );
         if( error )
